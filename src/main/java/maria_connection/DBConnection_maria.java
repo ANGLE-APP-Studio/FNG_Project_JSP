@@ -14,7 +14,7 @@ public class DBConnection_maria{
 
 	private static final String DB_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
 
-	private static final String DB_URL = "jdbc:mariadb://192.168.0.6:3306/";
+	private static final String DB_URL = "jdbc:mariadb://222.109.188.220:3306/";
 
 
 

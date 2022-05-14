@@ -30,14 +30,15 @@ public class ConnectDB {
 	String returns = "a";
 
 	// 데이터베이스와 통신하기 위한 코드가 들어있는 메서드
-	public String connectionDB(String id, String pwd) {
+	public String connectionDB(String UID, String PSW,String EML,String PNB,
+			String NCK,String BTD,String GND,String RNK) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			// 디비 연결
 			conn = DriverManager.getConnection("jdbc:mariadb://222.109.188.220:3306/example", "Angle", "1234");
 			sql = "select id from example where id = ?";// 조회
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, UID);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				// 정보를 넣는데 이미 정보가 존재할 경우(회원가입이 불가능한 경우
@@ -47,8 +48,16 @@ public class ConnectDB {
 				// 넣고자 하는 정보가 없을 경우 (회원가입이 가능한 경우)
 				sql2 = "insert into example values(?,?)"; // 삽입
 				pstmt2 = conn.prepareStatement(sql2);
-				pstmt2.setString(1, id);
-				pstmt2.setString(2, pwd);
+				
+				pstmt2.setString(1, UID);
+				pstmt2.setString(2, PSW);
+				pstmt2.setString(3, PNB);
+				pstmt2.setString(4, EML);
+				pstmt2.setString(5, NCK);
+				pstmt2.setString(6, GND);
+				pstmt2.setString(7, BTD);
+				pstmt2.setString(8, RNK);
+				
 				pstmt2.executeUpdate();
 				returns = "회원가입 가능";
 			}
