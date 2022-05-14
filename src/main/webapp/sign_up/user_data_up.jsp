@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page import= "maria_connection.ConnectDB" %>
 <%
-	String UID = request.getParameter("UID");
+	request.setCharacterEncoding("utf-8");
+	SimpleDateFormat tm = new SimpleDateFormat("yyyy-MM-dd");
+
+	String UID= request.getParameter("UID");
 	String PSW = request.getParameter("PSW");
 	String EML = request.getParameter("EML");
 	String PNB = request.getParameter("PNB");
@@ -13,5 +18,6 @@
 	
 	ConnectDB connectDB = ConnectDB.getInstance();
 	String returns = connectDB.connectionDB(UID,PSW,EML,PNB,NCK,BTD,GND,RNK);
+	System.out.println(UID+"\n"+PSW+"\n"+EML+"\n"+PNB+"\n"+NCK+"\n"+BTD+"\n"+GND+"\n"+RNK +"\n");
 	System.out.println("요청 결과 : " + returns);
 %>

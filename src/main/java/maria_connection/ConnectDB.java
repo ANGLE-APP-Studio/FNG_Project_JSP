@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ConnectDB {
 	// 싱글톤 패턴으로 사용 하기위 한 코드들
@@ -17,7 +19,7 @@ public class ConnectDB {
 	public ConnectDB() {
 
 	}
-
+	
 	String jdbcUrl = "jdbc:mariadb://222.109.188.220:3306/"; // MySQL 계정
 	String dbId = "Angle"; // MySQL 계정
 	String dbPw = "1234"; // 비밀번호
@@ -32,11 +34,12 @@ public class ConnectDB {
 	// 데이터베이스와 통신하기 위한 코드가 들어있는 메서드
 	public String connectionDB(String UID, String PSW,String EML,String PNB,
 			String NCK,String BTD,String GND,String RNK) {
+		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			// 디비 연결
 			conn = DriverManager.getConnection("jdbc:mariadb://222.109.188.220:3306/example", "Angle", "1234");
-			sql = "select id from example where id = ?";// 조회
+			sql = "select UID from mmb where UID = ?";// 조회
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, UID);
 			rs = pstmt.executeQuery();
@@ -46,7 +49,7 @@ public class ConnectDB {
 
 			} else {
 				// 넣고자 하는 정보가 없을 경우 (회원가입이 가능한 경우)
-				sql2 = "insert into example values(?,?)"; // 삽입
+				sql2 = "insert into mmb values(?,?,?,?,?,?,?,?)"; // 삽입
 				pstmt2 = conn.prepareStatement(sql2);
 				
 				pstmt2.setString(1, UID);
